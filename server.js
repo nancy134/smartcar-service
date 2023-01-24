@@ -38,4 +38,27 @@ app.get('/', (req, res) => {
     res.send("smartcar-service");
 });
 
+
+app.get('/vehicles/:id/vin', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getVin(accessToken, id).then(function(vin){
+        res.json(vin);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+app.get('/vehicles/:id/vin', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getVin(accessToken, id).then(function(vin){
+        res.json(vin);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 app.listen(PORT, HOST);
