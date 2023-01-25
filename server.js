@@ -72,4 +72,16 @@ app.get('/vehicles/:id/battery', (req, res) => {
     });
 });
 
+
+app.get('/vehicles/:id/odometer', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getOdometer(accessToken, id).then(function(odometer){
+        res.json(odometer);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 app.listen(PORT, HOST);
