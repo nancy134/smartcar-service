@@ -84,4 +84,17 @@ app.get('/vehicles/:id/odometer', (req, res) => {
     });
 });
 
+
+app.get('/vehicles/:id', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getVehicleAttributes(accessToken, id).then(function(attributes){
+        res.json(attributes);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+
 app.listen(PORT, HOST);
