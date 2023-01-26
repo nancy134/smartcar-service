@@ -96,5 +96,16 @@ app.get('/vehicles/:id', (req, res) => {
     });
 });
 
+app.get('/vehicles/:id/tires/pressure', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getTirePressure(accessToken, id).then(function(tirePressure){
+        res.json(tirePressure);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 
 app.listen(PORT, HOST);
