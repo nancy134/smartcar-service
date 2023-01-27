@@ -107,5 +107,16 @@ app.get('/vehicles/:id/tires/pressure', (req, res) => {
     });
 });
 
+app.get('/vehicles/:id/fuel', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getFuel(accessToken, id).then(function(fuel){
+        res.json(fuel);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 
 app.listen(PORT, HOST);
