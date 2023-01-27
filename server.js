@@ -118,5 +118,16 @@ app.get('/vehicles/:id/fuel', (req, res) => {
     });
 });
 
+app.get('/vehicles/:id/charge', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getCharge(accessToken, id).then(function(charge){
+        res.json(charge);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 
 app.listen(PORT, HOST);
