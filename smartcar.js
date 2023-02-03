@@ -173,3 +173,22 @@ exports.getPermissions = function(authorization, id){
         });
     });
 }
+
+exports.controlCharge = function(authorization, id, body){
+    return new Promise(function(resolve, reject){
+        var url = api + "/vehicles/" + id + "/charge";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'POST',
+            headers: headers,
+			data: body
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}
+
