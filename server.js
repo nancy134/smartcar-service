@@ -153,4 +153,16 @@ app.post('/vehicles/:id/charge', (req, res) => {
     });
 });
 
+app.post('/vehicles/:id/security', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+	var body = req.body;
+    smartcarService.controlSecurity(accessToken, id, body).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 app.listen(PORT, HOST);

@@ -192,3 +192,20 @@ exports.controlCharge = function(authorization, id, body){
     });
 }
 
+exports.controlSecurity = function(authorization, id, body){
+    return new Promise(function(resolve, reject){
+        var url = api + "/vehicles/" + id + "/security";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'POST',
+            headers: headers,
+			data: body
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}
