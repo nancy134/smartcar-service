@@ -176,6 +176,16 @@ app.get('/vehicles/:id/engine/oil', (req, res) => {
     });
 });
 
+app.get('/vehicles/:id/battery/capacity', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getBatteryCapacity(accessToken, id).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
 
 
 app.listen(PORT, HOST);
