@@ -209,3 +209,22 @@ exports.controlSecurity = function(authorization, id, body){
         });
     });
 }
+
+exports.getEngineOil = function(authorization, id){
+    return new Promise(function(resolve, reject){
+        var url = api + "/vehicles/" + id + "/engine/oil";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: headers
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}
+
+
