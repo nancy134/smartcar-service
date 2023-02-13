@@ -244,5 +244,21 @@ exports.getBatteryCapacity = function(authorization, id){
     });
 }
 
+exports.getUser = function(authorization){
+    return new Promise(function(resolve, reject){
+        var url = api + "/user";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: headers
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}
 
 

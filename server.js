@@ -188,4 +188,15 @@ app.get('/vehicles/:id/battery/capacity', (req, res) => {
 });
 
 
+app.get('/user', (req, res) => {
+    var accessToken = req.header('Authorization');
+    
+    smartcarService.getUser(accessToken).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
 app.listen(PORT, HOST);
