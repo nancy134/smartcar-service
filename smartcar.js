@@ -262,3 +262,37 @@ exports.getUser = function(authorization){
 }
 
 
+exports.getTeslaCompass = function(authorization, id){
+    return new Promise(function(resolve, reject){
+        var url = api + "/vehicles/" + id + "/tesla/compass";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: headers
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}
+
+
+exports.getTeslaChargeAmperage = function(authorization, id){
+    return new Promise(function(resolve, reject){
+        var url = api + "/vehicles/" + id + "/tesla/charge/ammeter";
+        var headers = utilities.createHeaders(authorization);
+        var options = {
+            url: url,
+            method: 'GET',
+            headers: headers
+        };
+        axios(options).then(function(result){
+            resolve(result.data);
+        }).catch(function(err){
+            reject(utilities.processAxiosError(err));
+        });
+    });
+}

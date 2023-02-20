@@ -199,4 +199,29 @@ app.get('/user', (req, res) => {
     });
 });
 
+
+app.get('/vehicles/:id/tesla/compass', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getTeslaCompass(accessToken, id).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+
+app.get('/vehicles/:id/tesla/charge/ammeter', (req, res) => {
+    var accessToken = req.header('Authorization');
+    var id = req.params.id;
+    smartcarService.getTeslaChargeAmperage(accessToken, id).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+
 app.listen(PORT, HOST);
