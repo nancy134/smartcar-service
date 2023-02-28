@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const smartcarService = require('./smartcar');
+const googleService = require('./google');
 
 
 const PORT = 8080;
@@ -216,6 +217,17 @@ app.get('/vehicles/:id/tesla/charge/ammeter', (req, res) => {
     var accessToken = req.header('Authorization');
     var id = req.params.id;
     smartcarService.getTeslaChargeAmperage(accessToken, id).then(function(result){
+        res.json(result);
+    }).catch(function(err){
+        console.log(err);
+        res.status(400).json(err);
+    });
+});
+
+app.get('/google/places', (req, res) => {
+    var lat = req.query.lat;
+	var long = req.query.long;
+    googleService.getPlaces(lat, long).then(function(result){
         res.json(result);
     }).catch(function(err){
         console.log(err);
