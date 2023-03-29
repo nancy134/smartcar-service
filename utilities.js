@@ -10,7 +10,8 @@ exports.processAxiosError = function(error){
 
 exports.createHeaders = function(authorization){
     var headers = {
-        "Authorization" : authorization
+        "Authorization" : authorization,
+        "SC-Unit-System": "imperial"
     };
     return headers;
 }
